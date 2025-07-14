@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <!-- Left Sidebar Filters -->
+        <div class="col-lg-3 col-xl-3 mb-4">
+            <div class="card p-3" style="border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,0.07),0 1.5px 4px rgba(0,0,0,0.03);min-width:220px; font-size:0.97rem;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="fw-bold" style="font-size:1rem;">Filters</span>
+                    <i class="bi bi-funnel" style="font-size:1.1rem;"></i>
+                </div>
+                <div class="mb-2">
+                    <div class="fw-bold mb-1" style="font-size:0.98rem;">Content Type</div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="articles">
+                        <label class="form-check-label" for="articles">Articles</label>
+                    </div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="photos">
+                        <label class="form-check-label" for="photos">Photos</label>
+                    </div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="videos">
+                        <label class="form-check-label" for="videos">Videos</label>
+                    </div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="reviews">
+                        <label class="form-check-label" for="reviews">Reviews</label>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="fw-bold mb-1" style="font-size:0.98rem;">Price Range</div>
+                    <input type="range" class="form-range" min="0" max="1000" step="10">
+                    <div class="d-flex justify-content-between small text-muted">
+                        <span>$0</span>
+                        <span>$1000+</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="fw-bold mb-1" style="font-size:0.98rem;">Rating</div>
+                    {% for n in range(5, 0, -1) %}
+                    <div class="form-check mb-1 d-flex align-items-center">
+                        <input class="form-check-input me-2" type="checkbox" id="rating{{n}}">
+                        <span style="color:#ff4d4f;font-size:1rem;">
+                            {% for s in range(n) %}&#9733;{% endfor %}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Main Content (search/filter card + grid) -->
+        <div class="col-lg-6 col-xl-6">
+            <!-- Search/Filter Card -->
+            <div class="card p-3 mb-3" style="border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,0.07),0 1.5px 4px rgba(0,0,0,0.03); font-size:0.98rem;">
+                <div class="mb-2 position-relative" style="max-width:100%;">
+                    <span class="position-absolute top-50 start-0 translate-middle-y ps-3" style="color:#b0b8c1;font-size:1.1rem;"><i class="bi bi-search"></i></span>
+                    <input class="form-control rounded-4 ps-5 pe-4 py-2 shadow-sm" type="search" placeholder="Search destinations, experiences, or travelers" style="font-size:1rem;height:40px;border:1.5px solid #eaeaea;background:#f8fafc;">
+                </div>
+                <div class="d-flex flex-wrap gap-2 mb-2">
+                    <button class="btn btn-outline-secondary d-flex align-items-center px-3 py-1 rounded-4" style="font-size:0.97rem;font-weight:500;">
+                        <i class="bi bi-geo-alt me-2"></i> All Destinations <i class="bi bi-chevron-down ms-2"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary d-flex align-items-center px-3 py-1 rounded-4" style="font-size:0.97rem;font-weight:500;">
+                        <i class="bi bi-hash me-2"></i> All Categories <i class="bi bi-chevron-down ms-2"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary d-flex align-items-center px-3 py-1 rounded-4" style="font-size:0.97rem;font-weight:500;">
+                        <i class="bi bi-calendar3 me-2"></i> Date Range <i class="bi bi-chevron-down ms-2"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary d-flex align-items-center px-3 py-1 rounded-4" style="font-size:0.97rem;font-weight:500;">
+                        <i class="bi bi-person me-2"></i> All Contributors <i class="bi bi-chevron-down ms-2"></i>
+                    </button>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Adventure</span>
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Luxury</span>
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Culture</span>
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Food</span>
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Nature</span>
+                    <span class="badge rounded-pill px-3 py-1" style="background:#f5faff;color:#2196f3;font-size:0.97rem;font-weight:500;">#Photography</span>
+                </div>
+            </div>
+            <!-- Card Grid (unchanged) -->
+            <div class="d-flex flex-wrap gap-3">
+                <div class="card mb-3 trending-dest-item" style="width: 17rem; font-size:0.97rem;">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Banff">
+                    <div class="card-body">
+                        <h6 class="card-title" style="font-size:1rem;">Banff, Canada</h6>
+                        <p class="card-text small">Discovering the pristine beauty of Canadian Rockies.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">15.2K likes</span>
+                            <span class="text-muted small">234 comments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 trending-dest-item" style="width: 17rem; font-size:0.97rem;">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Yosemite">
+                    <div class="card-body">
+                        <h6 class="card-title" style="font-size:1rem;">Yosemite, USA</h6>
+                        <p class="card-text small">Hiking the Mist Trail in Yosemite National Park.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">8.1K likes</span>
+                            <span class="text-muted small">98 comments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 trending-dest-item" style="width: 17rem; font-size:0.97rem;">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Bali">
+                    <div class="card-body">
+                        <h6 class="card-title" style="font-size:1rem;">Bali, Indonesia</h6>
+                        <p class="card-text small">Exploring the beaches and temples of Bali.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">12.7K likes</span>
+                            <span class="text-muted small">201 comments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 trending-dest-item" style="width: 17rem; font-size:0.97rem;">
+                    <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Santorini">
+                    <div class="card-body">
+                        <h6 class="card-title" style="font-size:1rem;">Santorini, Greece</h6>
+                        <p class="card-text small">Sunsets and white-washed buildings in Santorini.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">9.3K likes</span>
+                            <span class="text-muted small">134 comments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Sidebar -->
+        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+            <div class="position-sticky" style="top: 0; font-size:0.97rem;">
+                <!-- Trending Destinations -->
+                <div class="card mb-3 p-3" style="border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,0.07),0 1.5px 4px rgba(0,0,0,0.03);">
+                    <div class="fw-bold mb-2" style="font-size:1rem;">Trending Destinations</div>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center gap-2 trending-dest-item">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=32&q=80" class="rounded-3" width="32" height="32" alt="Banff">
+                            <span class="small">Banff, Canada</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 trending-dest-item">
+                            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=32&q=80" class="rounded-3" width="32" height="32" alt="Yosemite">
+                            <span class="small">Yosemite, USA</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 trending-dest-item">
+                            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=32&q=80" class="rounded-3" width="32" height="32" alt="Bali">
+                            <span class="small">Bali, Indonesia</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 trending-dest-item">
+                            <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=32&q=80" class="rounded-3" width="32" height="32" alt="Santorini">
+                            <span class="small">Santorini, Greece</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Popular Contributors -->
+                <div class="card p-3" style="border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,0.07),0 1.5px 4px rgba(0,0,0,0.03);">
+                    <div class="fw-bold mb-2" style="font-size:1rem;">Popular Contributors</div>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center justify-content-between trending-dest-item">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle" width="28" height="28" alt="User1">
+                                <span class="small">Alex Carter</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1" style="font-size:0.95rem;">Follow</button>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between trending-dest-item">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle" width="28" height="28" alt="User2">
+                                <span class="small">Priya Singh</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1" style="font-size:0.95rem;">Follow</button>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between trending-dest-item">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/men/65.jpg" class="rounded-circle" width="28" height="28" alt="User3">
+                                <span class="small">Liam Chen</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1" style="font-size:0.95rem;">Follow</button>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between trending-dest-item">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle" width="28" height="28" alt="User4">
+                                <span class="small">Sara Müller</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1" style="font-size:0.95rem;">Follow</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm" style="font-size:0.97rem; border-radius:18px;">
+                <div class="card-body p-4">
+                    <h4 class="mb-3 fw-semibold" style="font-size:1.18rem;">Create New Post</h4>
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs mb-3" style="border-bottom:1.5px solid #eaeaea;">
+                        <li class="nav-item">
+                            <a class="nav-link active px-3 py-2" href="#" id="tab-post">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 py-2 text-muted" href="#" id="tab-story">Story</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 py-2 text-muted" href="#" id="tab-guide">Guide</a>
+                        </li>
+                    </ul>
+                    <form method="post" id="create-post-form">
+                        <input type="hidden" name="user" value="You">
+                        <input type="hidden" name="image" id="image-data-field">
+                        <input type="hidden" name="type" id="post-type-field" value="post">
+                        <!-- Upload Area (shared) -->
+                        <div class="mb-3 p-4 d-flex flex-column align-items-center justify-content-center" style="border:2px dashed #e0e6ed;border-radius:14px;background:#f8fafd;min-height:160px;">
+                            <span class="mb-2" style="color:#b0b8c1;font-size:2.2rem;"><i class="bi bi-camera"></i></span>
+                            <div class="mb-2" style="color:#7a8599;font-size:1.01rem;">Drag photos here or use the buttons below</div>
+                            <img id="image-preview" src="" style="max-width:320px;max-height:180px;display:none;border-radius:12px;margin-bottom:10px;" />
+                            <input type="file" id="image-file-input" accept="image/*" style="display:none;">
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-primary px-4 py-2" id="select-gallery-btn" style="font-size:1.01rem;">Select from Gallery</button>
+                                <button type="button" class="btn btn-outline-secondary px-4 py-2" id="take-photo-btn" style="font-size:1.01rem;"><i class="bi bi-camera me-2"></i>Take Photo</button>
+                            </div>
+                        </div>
+                        <!-- Post Fields -->
+                        <div id="post-fields">
+                            <div class="mb-3">
+                                <textarea class="form-control rounded-3" rows="3" name="content" placeholder="Share your travel story..." style="font-size:1.01rem;background:#f8fafc;"></textarea>
+                            </div>
+                            <div class="mb-3 input-group">
+                                <span class="input-group-text bg-white border-end-0" style="border-radius:8px 0 0 8px;"><i class="bi bi-geo-alt"></i></span>
+                                <input type="text" class="form-control border-start-0" name="location" placeholder="Add location" style="font-size:1.01rem;background:#f8fafc;border-radius:0 8px 8px 0;">
+                            </div>
+                            <div class="mb-3 input-group">
+                                <span class="input-group-text bg-white border-end-0" style="border-radius:8px 0 0 8px;"><i class="bi bi-hash"></i></span>
+                                <input type="text" class="form-control border-start-0" name="hashtags" placeholder="Add tags (e.g., #travel #adventure)" style="font-size:1.01rem;background:#f8fafc;border-radius:0 8px 8px 0;">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <select class="form-select" name="visibility" style="font-size:1.01rem;background:#f8fafc;">
+                                        <option>Public</option>
+                                        <option>Private</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="category" style="font-size:1.01rem;background:#f8fafc;">
+                                        <option>Adventure</option>
+                                        <option>Leisure</option>
+                                        <option>Culture</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Story Fields -->
+                        <div id="story-fields" style="display:none;">
+                            <div class="mb-3">
+                                <textarea class="form-control rounded-3" rows="6" name="story_content" placeholder="Write your story..." style="font-size:1.05rem;background:#f8fafc;"></textarea>
+                            </div>
+                        </div>
+                        <!-- Guide Fields -->
+                        <div id="guide-fields" style="display:none;">
+                            <div class="mb-3">
+                                <input type="text" class="form-control rounded-3" name="guide_title" placeholder="Guide Title" style="font-size:1.05rem;background:#f8fafc;">
+                            </div>
+                            <div id="guide-steps-list">
+                                <div class="mb-3 guide-step-row">
+                                    <input type="text" class="form-control rounded-3 mb-2" name="guide_steps[]" placeholder="Step 1" style="font-size:1.01rem;background:#f8fafc;">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm mb-3" id="add-guide-step">+ Add Step</button>
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-outline-secondary px-4 py-2" style="font-size:1.01rem;">Save as Draft</button>
+                            <button type="submit" class="btn btn-danger px-4 py-2" style="font-size:1.01rem;">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-3 border-0 shadow-sm" style="font-size:0.97rem; border-radius:14px;">
+                <div class="card-body p-4">
+                    <h6 class="mb-3 fw-semibold" style="font-size:1.01rem;">Posting Tips</h6>
+                    <ul class="list-unstyled small mb-0" style="color:#2196f3;">
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Use high-quality photos</li>
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Add location details</li>
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Include relevant hashtags</li>
+                        <li><i class="bi bi-check-circle me-2"></i>Be descriptive in your caption</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm" style="font-size:0.97rem; border-radius:14px;">
+                <div class="card-body p-4">
+                    <h6 class="mb-3 fw-semibold" style="font-size:1.01rem;">Recent Activity</h6>
+                    <ul class="list-unstyled small mb-0">
+                        <li class="mb-3 d-flex align-items-center"><img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-2" style="width:32px;height:32px;object-fit:cover;"> <span><span class="fw-semibold">Sarah Chen</span> posted a new travel story<br><span class="text-muted">2 hours ago</span></span></li>
+                        <li class="d-flex align-items-center"><img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle me-2" style="width:32px;height:32px;object-fit:cover;"> <span><span class="fw-semibold">Mike Wilson</span> shared a photo from <span class="text-primary">Bali, Indonesia</span><br><span class="text-muted">4 hours ago</span></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

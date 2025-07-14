@@ -1,0 +1,288 @@
+body {
+    background: #f5f7fa !important;
+    color: #222;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.navbar {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    background: #fff !important;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.navbar-brand {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.nav-link {
+    color: #222 !important;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+    opacity: 1;
+}
+
+footer {
+    background: #fff !important;
+    border-top: 1px solid #eaeaea;
+    color: #888;
+    font-size: 0.97rem;
+}
+
+.card {
+    border-radius: 22px !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1.5px 4px rgba(0,0,0,0.03);
+    background: #fff !important;
+    border: none;
+}
+
+.card-img-top {
+    border-top-left-radius: 22px !important;
+    border-top-right-radius: 22px !important;
+    max-height: 340px;
+    object-fit: cover;
+}
+
+.feed-avatar {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.feed-username {
+    font-weight: 700;
+    font-size: 1.13rem;
+}
+
+.feed-location {
+    font-size: 0.98rem;
+    color: #6c757d;
+}
+
+.feed-hashtags .badge {
+    background: #f0f2f5;
+    color: #3b3b3b;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-right: 0.25rem;
+    font-size: 0.97rem;
+}
+
+.feed-actions i {
+    font-size: 1.35rem;
+    color: #6c757d;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.feed-actions i:hover {
+    color: #007bff;
+}
+
+.sidebar-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-right: 0.75rem;
+}
+
+.sidebar-list-title {
+    font-weight: 700;
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-nav-item {
+    transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), background 0.18s;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sidebar-nav-item:hover {
+    transform: scale(1.07);
+    background: #f5f7fa;
+}
+.sidebar-nav-item.active {
+    background: #f5faff;
+    color: #2196f3 !important;
+    font-weight: 700;
+}
+
+.trending-dest-item {
+    transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), background 0.18s;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.trending-dest-item:hover, .trending-dest-item.active {
+    transform: scale(1.07);
+    background: #f5faff;
+}
+
+.suggested-traveler-item {
+    transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), background 0.18s;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.suggested-traveler-item:hover {
+    transform: scale(1.07);
+    background: #f5f7fa;
+}
+
+input[type="search"], .form-control {
+    background: #f5f7fa !important;
+    border: none;
+    font-size: 1rem;
+    border-radius: 999px;
+    padding: 0.5rem 1.2rem;
+}
+input[type="search"]:focus, .form-control:focus {
+    box-shadow: none;
+    border: 1px solid #eaeaea;
+    background: #f5f7fa !important;
+}
+
+.share-btn:hover, .share-btn:focus {
+    background: #2196f3 !important;
+    color: #fff !important;
+    border-color: #2196f3 !important;
+    box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+    text-decoration: none;
+}
+
+.saved-post-card {
+    transition: box-shadow 0.18s, border-color 0.18s;
+    border: 2px solid #fff;
+}
+.saved-post-card:hover {
+    box-shadow: 0 8px 32px rgba(33,150,243,0.10), 0 2px 8px rgba(33,150,243,0.08);
+    border-color: #2196f3;
+}
+
+/* Blur effect for modal background */
+.blurred-bg {
+    filter: blur(6px) brightness(0.95);
+    transition: filter 0.2s;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Ensure sidebar is wide enough */
+aside {
+    min-width: 220px !important;
+    width: 220px !important;
+}
+
+/* Nav icon row (top and bottom nav) */
+.nav-icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    margin: 0 6px;
+    border-radius: 12px;
+    transition: transform 0.18s cubic-bezier(.4,1.5,.5,1), background 0.18s, color 0.18s;
+    color: #222;
+    text-decoration: none;
+    font-size: 1.08rem;
+}
+.nav-icon-btn:hover, .nav-icon-btn:focus {
+    transform: scale(1.07);
+    color: #1976d2;
+    text-decoration: none;
+}
+
+#bottom-nav .nav-icon-btn {
+    flex: 1;
+    font-size: 1.1rem;
+    margin: 0 2px;
+    padding: 8px 0 4px 0;
+    border-radius: 10px;
+}
+
+#bottom-nav .nav-icon-btn.active, .nav-icon-btn.active {
+    color: #1976d2;
+    background: #f5faff;
+    font-weight: 600;
+}
+
+/* Add a little space above the bottom nav bar */
+#bottom-nav {
+    margin-bottom: 2px;
+}
+
+/* Remove any specific hover background for bottom nav bar icons */
+#bottom-nav .nav-icon-btn:hover, #bottom-nav .nav-icon-btn:focus {
+    background: none;
+}
+
+/* Standalone page styling */
+.standalone-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.standalone-content h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.standalone-content p {
+    color: #666;
+    font-size: 16px;
+}
+
+#feed-posts-list {
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+#my-trips-posts-list {
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+@media (max-width: 991px) {
+    .col-lg-8, .col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .sidebar-list-item {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+  .col-lg-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+    max-width: 33.33333333%;
+  }
+} 

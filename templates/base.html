@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTS Global Voyage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hashtag badge wrapping fix */
+        .post-card .mb-2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+        .post-card .badge {
+            word-break: break-all;
+            max-width: 100%;
+            white-space: normal;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pixel-perfect Navbar (logo left, big search center, bell+avatar right) -->
+    <nav class="navbar navbar-light bg-white border-bottom" style="height:56px;min-height:56px;padding-top:0;padding-bottom:0;">
+        <div class="container-fluid px-3 d-flex align-items-center justify-content-between" style="height:56px;min-height:56px;">
+            <!-- Logo and site name -->
+            <div class="d-flex align-items-center" style="min-width:180px;">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="height:32px;width:32px;object-fit:contain;">
+                <span class="fw-bold ms-2" style="font-size:1.05rem;letter-spacing:0.01em;color:#15396a;">NTS Global Voyage</span>
+            </div>
+            {% if request.path != '/' %}
+            <!-- Nav icons row (left of search bar, only on non-Home pages) -->
+            <div class="d-flex align-items-center gap-3 me-3">
+                <a href="/" class="nav-icon-btn text-decoration-none text-dark d-flex flex-column align-items-center">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span style="font-size:0.97rem;font-weight:500;">Home</span>
+                </a>
+                <a href="/booking" class="nav-icon-btn text-decoration-none text-dark d-flex flex-column align-items-center">
+                    <i class="bi bi-calendar"></i>
+                    <span style="font-size:0.97rem;">Bookings</span>
+                </a>
+                <a href="/discover" class="nav-icon-btn text-decoration-none text-dark d-flex flex-column align-items-center">
+                    <i class="bi bi-compass"></i>
+                    <span style="font-size:0.97rem;">Discover</span>
+                </a>
+                <a href="/report" class="nav-icon-btn text-decoration-none text-dark d-flex flex-column align-items-center">
+                    <i class="bi bi-bar-chart"></i>
+                    <span style="font-size:0.97rem;">Reports</span>
+                </a>
+            </div>
+            {% endif %}
+            <!-- Centered search bar -->
+            <form class="flex-grow-1 d-flex justify-content-center" style="max-width:500px;">
+                <div class="position-relative w-100" style="max-width:500px;">
+                    <span class="position-absolute top-50 start-0 translate-middle-y ps-3" style="color:#b0b8c1;font-size:1rem;"><i class="bi bi-search"></i></span>
+                    <input class="form-control rounded-pill ps-5 pe-4 py-1" type="search" placeholder="Search destinations, experiences..." aria-label="Search" style="background:#f5f7fa;border:none;height:32px;font-size:0.97rem;">
+                </div>
+            </form>
+            <!-- Bell, +Share, and avatar -->
+            <div class="d-flex align-items-center justify-content-end" style="min-width:80px;gap:16px;">
+                <a href="#" class="text-dark" style="font-size:1.2rem;"><i class="bi bi-bell"></i></a>
+                <a href="/create_post" class="btn btn-outline-primary d-flex align-items-center px-3 py-1 rounded-pill share-btn" style="font-size:0.97rem;font-weight:500;">
+                    <i class="bi bi-plus-lg me-1"></i> Share
+                </a>
+                <a href="/profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" style="height:28px;width:28px;object-fit:cover;border-radius:50%;">
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex" style="min-height:100vh;">
+        <!-- Left Vertical Sidebar -->
+        <aside class="d-flex flex-column align-items-start px-4 pt-5" style="width:220px;background:#fff;border-right:1px solid #f0f0f0;min-height:100vh;">
+            <nav class="w-100">
+                <ul class="nav flex-column gap-4">
+                    {% set current_path = request.path %}
+                    <a href="/" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path == '/' %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-house-door" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>Home</span>
+                        </li>
+                    </a>
+                    <a href="/explore" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path.startswith('/explore') %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-compass" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>Explore</span>
+                        </li>
+                    </a>
+                    <a href="/my_trips" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path.startswith('/my_trips') %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-airplane" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>My Trips</span>
+                        </li>
+                    </a>
+                    <a href="/saved" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path.startswith('/saved') %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-bookmark" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>Saved Posts</span>
+                        </li>
+                    </a>
+                    <a href="/groups" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path.startswith('/groups') %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-people" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>Travel Groups</span>
+                        </li>
+                    </a>
+                    <a href="/create_post" class="text-decoration-none text-dark">
+                        <li class="nav-item d-flex align-items-center sidebar-nav-item {% if current_path.startswith('/create_post') %}active{% endif %}" style="font-size:1.05rem;font-weight:500;line-height:1.8rem;">
+                            <i class="bi bi-plus-square" style="font-size:1.4rem;margin-right:14px;"></i>
+                            <span>Create Post</span>
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main Content Area (page content + footer) -->
+        <div class="flex-grow-1 d-flex flex-column" style="min-width:0;">
+            <main style="background:#f5f7fa; min-height:80vh;">
+                {% block content %}{% endblock %}
+            </main>
+            {% if request.path == '/' %}
+            <!-- Bottom nav bar only on Home page -->
+            <div id="bottom-nav" style="position:fixed;bottom:0;left:0;width:100vw;height:60px;background:#fff;box-shadow:0 -2px 12px rgba(0,0,0,0.04);display:flex;z-index:9999;">
+                <a id="nav-feed" href="/" class="nav-icon-btn" style="color:#1976d2;">
+                    <i class="bi bi-house-door-fill" style="font-size:1.5rem;"></i>
+                    <span style="font-size:0.97rem;font-weight:500;">Feed</span>
+                </a>
+                <a id="nav-booking" href="/booking" class="nav-icon-btn">
+                    <i class="bi bi-calendar" style="font-size:1.5rem;"></i>
+                    <span style="font-size:0.97rem;">Booking</span>
+                </a>
+                <a id="nav-discover" href="/discover" class="nav-icon-btn">
+                    <i class="bi bi-compass" style="font-size:1.5rem;"></i>
+                    <span style="font-size:0.97rem;">Discover</span>
+                </a>
+                <a id="nav-report" href="/report" class="nav-icon-btn">
+                    <i class="bi bi-bar-chart" style="font-size:1.5rem;"></i>
+                    <span style="font-size:0.97rem;">Report</span>
+                </a>
+                <a id="nav-profile" href="/profile" class="nav-icon-btn">
+                    <i class="bi bi-person" style="font-size:1.5rem;"></i>
+                    <span style="font-size:0.97rem;">Profile</span>
+                </a>
+            </div>
+            {% endif %}
+            <footer class="bg-white border-top py-3 mt-5">
+                <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <div class="d-flex mb-2 mb-md-0">
+                        <a href="#" class="mx-2 text-muted small">Terms</a>
+                        <a href="#" class="mx-2 text-muted small">Privacy Policy</a>
+                        <a href="#" class="mx-2 text-muted small">Help Center</a>
+                    </div>
+                    <div class="text-muted small">&copy; 2024 NTS Global Voyage</div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html> 
